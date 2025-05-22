@@ -2,63 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\AnggotaKeluarga;
+use App\Models\Keluarga;
+use App\Http\Requests\StoreAnggotaKeluargaRequest;
+use App\Http\Requests\UpdateAnggotaKeluargaRequest;
 
 class AnggotaKeluargaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index($keluarga_id)
     {
-        //
+        $keluarga = Keluarga::findOrFail($keluarga_id);
+        $anggotaList = $keluarga->anggotaKeluarga ?? collect(); // fallback ke collection kosong jika null
+
+        return view('anggota.index', compact('keluarga', 'anggotaList'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($keluarga)
     {
-        //
+        $keluarga = Keluarga::findOrFail($keluarga);
+        return view('anggota.create', compact('keluarga'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreAnggotaKeluargaRequest $request, $keluarga)
     {
-        //
+        $data = $request->validated();
+        $data['keluarga_id'] = $keluarga;
+        AnggotaKeluarga::create($data);
+
+        return redirect()->route('keluarga.show', $keluarga)->with('success', 'Data anggota berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(AnggotaKeluarga $anggota)
     {
-        //
+        // Jika ingin menampilkan data keluarga juga:
+        $keluarga = $anggota->keluarga; // pastikan relasi 'keluarga' ada di model AnggotaKeluarga
+
+        return view('anggota.show', compact('anggota', 'keluarga'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(AnggotaKeluarga $anggota)
     {
-        //
+        $keluargas = Keluarga::all();
+        return view('anggota.edit', compact('anggota', 'keluargas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateAnggotaKeluargaRequest $request, AnggotaKeluarga $anggota)
     {
-        //
+        $anggota->update($request->validated());
+
+        return redirect()->route('keluarga.show', $anggota->keluarga_id)->with('success', 'Data anggota berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(AnggotaKeluarga $anggota)
     {
-        //
+        $keluargaId = $anggota->keluarga_id;
+        $anggota->delete();
+        return redirect()->route('keluarga.show', $keluargaId)->with('success', 'Data anggota berhasil dihapus');
     }
 }

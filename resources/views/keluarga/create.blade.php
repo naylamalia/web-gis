@@ -51,7 +51,7 @@
             <label>Kategori Kemiskinan</label>
             <select name="kategori_kemiskinan" class="form-control">
                 <option value="">-- Pilih --</option>
-                @foreach(['sangat miskin', 'miskin', 'sedang miskin'] as $kategori)
+                @foreach(['rentan miskin', 'miskin', 'menuju kelas menengah', 'kelas menengah', 'kelas atas'] as $kategori)
                     <option value="{{ $kategori }}" {{ old('kategori_kemiskinan') == $kategori ? 'selected' : '' }}>
                         {{ ucfirst($kategori) }}
                     </option>

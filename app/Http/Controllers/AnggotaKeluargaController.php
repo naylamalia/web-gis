@@ -13,7 +13,7 @@ class AnggotaKeluargaController extends Controller
     public function index($keluarga_id)
     {
         $keluarga = Keluarga::findOrFail($keluarga_id);
-        $anggotaList = $keluarga->anggotaKeluarga ?? collect(); // fallback ke collection kosong jika null
+        $anggotaList = $keluarga->anggotaKeluarga ?? collect(); 
 
         return view('anggota.index', compact('keluarga', 'anggotaList'));
     }
@@ -35,8 +35,8 @@ class AnggotaKeluargaController extends Controller
 
     public function show(AnggotaKeluarga $anggota)
     {
-        // Jika ingin menampilkan data keluarga juga:
-        $keluarga = $anggota->keluarga; // pastikan relasi 'keluarga' ada di model AnggotaKeluarga
+     
+        $keluarga = $anggota->keluarga; 
 
         return view('anggota.show', compact('anggota', 'keluarga'));
     }

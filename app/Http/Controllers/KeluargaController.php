@@ -1,64 +1,71 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use App\Models\Keluarga;
+use App\Http\Requests\StoreKeluargaRequest;
+use App\Http\Requests\UpdateKeluargaRequest;
+
 
 class KeluargaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $keluargas = Keluarga::with('anggotaKeluarga')->get();
+        return view('keluarga.index', compact('keluargas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('keluarga.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(StoreKeluargaRequest $request)
     {
-        //
+        Keluarga::create($request->validated());
+
+
+        return redirect()->route('keluarga.index')->with('success', 'Data keluarga berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function webgis()
     {
-        //
+        $keluargas = Keluarga::all(); // Pastikan ada kolom latitude & longitude
+        return view('webgis', compact('keluargas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function show(Keluarga $keluarga)
     {
-        //
+        $keluarga->load('anggotaKeluarga');
+        return view('keluarga.show', compact('keluarga'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+    public function edit(Keluarga $keluarga)
     {
-        //
+        return view('keluarga.edit', compact('keluarga'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    public function update(UpdateKeluargaRequest $request, Keluarga $keluarga)
     {
-        //
+        $keluarga->update($request->validated());
+
+
+        return redirect()->route('keluarga.index')->with('success', 'Data keluarga berhasil diperbarui');
+    }
+
+
+    public function destroy(Keluarga $keluarga)
+    {
+        $keluarga->delete();
+        return redirect()->route('keluarga.index')->with('success', 'Data keluarga berhasil dihapus');
     }
 }
+

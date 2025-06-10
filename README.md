@@ -1,2 +1,2 @@
 # web-gis
- Kelompok 10 Mata Kuliah Sistem Informasi Geografis
+ Kelompok 7 Mata Kuliah Sistem Informasi Geografis

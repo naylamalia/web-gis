@@ -8,7 +8,7 @@
             <p><strong>Nama Kepala Keluarga:</strong> {{ $keluarga->nama_kepala_keluarga }}</p>
             <p><strong>Alamat:</strong> {{ $keluarga->alamat }}</p>
             <p><strong>RT / RW:</strong> {{ $keluarga->rt }} / {{ $keluarga->rw }}</p>
-            <p><strong>Desa:</strong> {{ $keluarga->desa }}</p>
+            <p><strong>Desa / Kelurahan:</strong> {{ $keluarga->desa }}</p>
             <p><strong>Kecamatan:</strong> {{ $keluarga->kecamatan }}</p>
             <p><strong>Kategori Kemiskinan:</strong> {{ ucfirst($keluarga->kategori_kemiskinan) }}</p>
             <p><strong>Bantuan:</strong> {{ $keluarga->bantuan }}</p>
@@ -48,7 +48,7 @@
                             <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini??')">
                                     <i class="bi bi-trash3"></i> 
                                 </button>
                             </form>

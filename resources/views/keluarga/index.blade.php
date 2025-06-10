@@ -106,7 +106,7 @@
                                 <form action="{{ route('keluarga.destroy', $kk->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini??')">
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </form>

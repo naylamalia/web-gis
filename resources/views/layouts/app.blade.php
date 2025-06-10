@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistem Pendataan Keluarga Kurang Sejahtera</title>
+    <title>Sistem Pendataan Keluarga Kurang Mampu</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -290,7 +290,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('webgis') ? 'active' : '' }}" href="{{ route('webgis') }}">
-                            <i class="bi bi-geo-alt-fill"></i> <span>Peta Keluarga Kurang</span>
+                            <i class="bi bi-geo-alt-fill"></i> <span>Peta Keluarga Kurang Mampu</span>
                         </a>
                     </li>
                 </ul>

@@ -288,7 +288,7 @@
                 </div>
                 <div class="card-body text-center">
                     <p class="welcome-text">
-                        Selamat datang di <strong>Sistem Pendataan Keluarga Kurang Sejahtera Kota Pontianak</strong>
+                        Selamat datang di <strong>Sistem Pendataan Keluarga Kurang Mampu Kota Pontianak</strong>
                     </p>
 
                     {{-- Statistik Mini --}}
@@ -316,14 +316,14 @@
                                 <i class="bi bi-people-fill"></i> Daftar Keluarga
                             </a>
                             <a href="{{ route('webgis') }}" class="nav-btn btn-primary-custom">
-                                <i class="bi bi-geo-alt-fill"></i> Peta Keluarga Kurang Sejahtera
+                                <i class="bi bi-geo-alt-fill"></i> Peta Keluarga Kurang Mampu
                             </a>
                         </div>
                     </div>
 
                     {{-- Quote atau Motivasi --}}
                     <div class="quote-section">
-                        <p class="quote-text">Kelompok 10</p>
+                        <p class="quote-text">Kelompok 7</p>
                     </div>
                 </div>
             </div>

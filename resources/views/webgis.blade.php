@@ -3,8 +3,8 @@
 @section('content')
 <div class="container mt-4">
     <div class="text-center mb-4">
-        <h2 class="fw-bold">Peta Sebaran Keluarga Kurang Sejahtera</h2>
-        <p class="text-muted">Menampilkan seluruh data keluarga kurang sejahtera di Kota Pontianak secara geospasial</p>
+        <h2 class="fw-bold">Peta Sebaran Keluarga Kurang Mampu</h2>
+        <p class="text-muted">Menampilkan seluruh data keluarga kurang mampu di Kota Pontianak secara geospasial</p>
     </div>
 
     {{-- Fitur Cari --}}
@@ -47,7 +47,7 @@
                         <div class="d-grid gap-2">
                             <a href='{{ route('keluarga.show', $keluarga->id) }}' class='btn btn-sm btn-outline-info'>Detail</a>
                             <a href='{{ route('keluarga.edit', $keluarga->id) }}' class='btn btn-sm btn-outline-warning'>Edit</a>
-                            <form action='{{ route('keluarga.destroy', $keluarga->id) }}' method='POST' onsubmit="return confirm('Yakin hapus?')" class="d-inline">
+                            <form action='{{ route('keluarga.destroy', $keluarga->id) }}' method='POST' onsubmit="return confirm('Anda yakin ingin menghapus data ini??')" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type='submit' class='btn btn-sm btn-outline-danger w-100'>Hapus</button>

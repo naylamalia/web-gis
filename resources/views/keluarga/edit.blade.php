@@ -39,7 +39,7 @@
         </div>
 
         <div class="mb-3">
-            <label>Desa</label>
+            <label>Desa / Kelurahan</label>
             <input type="text" name="desa" class="form-control" value="{{ old('desa', $keluarga->desa) }}">
         </div>
 

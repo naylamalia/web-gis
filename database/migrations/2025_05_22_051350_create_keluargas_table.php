@@ -10,6 +10,8 @@ class CreateKeluargasTable extends Migration
     {
         Schema::create('keluargas', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_kk')->unique();
+            $table->string('nik_kepala_keluarga');
             $table->string('nama_kepala_keluarga');
             $table->text('alamat');
             $table->decimal('latitude', 10, 7);

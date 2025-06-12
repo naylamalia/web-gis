@@ -14,6 +14,8 @@ class Keluarga extends Model
 
 
     protected $fillable = [
+        'nomor_kk', 
+        'nik_kepala_keluarga',
         'nama_kepala_keluarga',
         'alamat',
         'latitude',
@@ -36,5 +38,11 @@ class Keluarga extends Model
     {
         return $this->hasMany(\App\Models\AnggotaKeluarga::class, 'keluarga_id');
     }
+
+    public function bantuanKk()
+    {
+        return $this->hasMany(\App\Models\BantuanKk::class, 'keluarga_id');
+    }
+
 }
 

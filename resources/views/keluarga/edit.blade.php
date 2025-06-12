@@ -23,6 +23,16 @@
         </div>
 
         <div class="mb-3">
+            <label>Nomor KK</label>
+            <input type="text" name="nomor_kk" class="form-control" value="{{ old('nomor_kk', $keluarga->nomor_kk) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>NIK Kepala Keluarga</label>
+            <input type="text" name="nik_kepala_keluarga" class="form-control" value="{{ old('nik_kepala_keluarga', $keluarga->nik_kepala_keluarga) }}" required>
+        </div>
+
+        <div class="mb-3">
             <label>Alamat</label>
             <textarea name="alamat" class="form-control">{{ old('alamat', $keluarga->alamat) }}</textarea>
         </div>
@@ -52,7 +62,7 @@
             <label>Kategori Kemiskinan</label>
             <select name="kategori_kemiskinan" class="form-control">
                 <option value="">-- Pilih --</option>
-                @foreach(['sangat miskin', 'miskin', 'sedang miskin'] as $kategori)
+                @foreach(['rentan miskin', 'miskin', 'menuju kelas menengah', 'kelas menengah', 'kelas atas'] as $kategori)
                     <option value="{{ $kategori }}" {{ old('kategori_kemiskinan', $keluarga->kategori_kemiskinan) == $kategori ? 'selected' : '' }}>
                         {{ ucfirst($kategori) }}
                     </option>
@@ -60,10 +70,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label>Bantuan</label>
-            <input type="text" name="bantuan" class="form-control" value="{{ old('bantuan', $keluarga->bantuan) }}">
-        </div>
+        <!-- Bagian bantuan dihapus -->
 
         <div class="mb-3">
             <label>Lokasi (klik pada peta)</label>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\BantuanKkController;
 use App\Http\Controllers\AnggotaKeluargaController;
 
 Route::get('/', function () {
@@ -29,3 +30,12 @@ Route::delete('anggota/{anggota}', [AnggotaKeluargaController::class, 'destroy']
 Route::get('/webgis', [KeluargaController::class, 'webgis'])->name('webgis');
 
 Route::get('anggota/{anggota}', [AnggotaKeluargaController::class, 'show'])->name('anggota.show');
+
+Route::resource('bantuan', BantuanKkController::class)->except(['show']);
+
+Route::get('bantuan/create/{keluarga_id}', [BantuanKkController::class, 'create'])->name('bantuan.create');
+Route::post('bantuan', [BantuanKkController::class, 'store'])->name('bantuan.store');
+Route::get('bantuan/{bantuan}/edit', [BantuanKkController::class, 'edit'])->name('bantuan.edit');
+Route::put('bantuan/{bantuan}', [BantuanKkController::class, 'update'])->name('bantuan.update');
+Route::delete('bantuan/{bantuan}', [BantuanKkController::class, 'destroy'])->name('bantuan.destroy');
+

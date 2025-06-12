@@ -22,6 +22,16 @@
         </div>
 
         <div class="mb-3">
+            <label>Nomor KK</label>
+            <input type="text" name="nomor_kk" class="form-control" value="{{ old('nomor_kk') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>NIK Kepala Keluarga</label>
+            <input type="text" name="nik_kepala_keluarga" class="form-control" value="{{ old('nik_kepala_keluarga') }}" required>
+        </div>
+
+        <div class="mb-3">
             <label>Alamat</label>
             <textarea name="alamat" class="form-control">{{ old('alamat') }}</textarea>
         </div>
@@ -59,10 +69,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
-            <label>Bantuan</label>
-            <input type="text" name="bantuan" class="form-control" value="{{ old('bantuan') }}">
-        </div>
+        <!-- Bagian bantuan dihapus -->
 
         <div class="mb-3">
             <label>Lokasi (klik pada peta)</label>

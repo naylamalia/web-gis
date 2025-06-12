@@ -14,6 +14,8 @@ class StoreKeluargaRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'nomor_kk' => 'required|unique:keluargas',
+            'nik_kepala_keluarga' => 'required',
             'nama_kepala_keluarga' => 'required|string|max:255',
             'alamat' => 'required|string',
             'latitude' => 'required|numeric',

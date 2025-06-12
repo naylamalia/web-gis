@@ -83,6 +83,8 @@
                 <thead>
                     <tr>
                         <th>Nama Kepala Keluarga</th>
+                        <th>No KK</th>
+                        <th>NIK Kepala Keluarga</th>
                         <th>Alamat</th>
                         <th>RT/RW</th>
                         <th>Kategori</th>
@@ -93,6 +95,8 @@
                     @forelse($keluargas as $kk)
                         <tr>
                             <td>{{ $kk->nama_kepala_keluarga }}</td>
+                            <td>{{ $kk->nomor_kk }}</td>
+                            <td>{{ $kk->nik_kepala_keluarga }}</td>
                             <td>{{ $kk->alamat }}</td>
                             <td>{{ $kk->rt }}/{{ $kk->rw }}</td>
                             <td>{{ $kk->kategori_kemiskinan }}</td>

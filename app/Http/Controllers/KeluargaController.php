@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keluarga;
+use App\Models\LogPerubahanStatus;
 use App\Http\Requests\StoreKeluargaRequest;
 use App\Http\Requests\UpdateKeluargaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KeluargaController extends Controller
 {
@@ -35,8 +38,8 @@ class KeluargaController extends Controller
 
     public function show(Keluarga $keluarga)
     {
-        // Load relasi anggota keluarga dan riwayat bantuan agar tidak null di view
-        $keluarga->load(['anggotaKeluarga', 'bantuanKk']);
+        // Load relasi anggota keluarga, riwayat bantuan, dan log perubahan status
+        $keluarga->load(['anggotaKeluarga', 'bantuanKk', 'logPerubahanStatus']);
         return view('keluarga.show', compact('keluarga'));
     }
 
@@ -50,6 +53,44 @@ class KeluargaController extends Controller
         $keluarga->update($request->validated());
 
         return redirect()->route('keluarga.index')->with('success', 'Data keluarga berhasil diperbarui');
+    }
+
+    // Method baru untuk update status KK
+    public function updateStatus(Request $request, Keluarga $keluarga)
+    {
+        $request->validate([
+            'status_kk' => 'required|in:aktif,pindah,tidak_miskin,meninggal,tidak_aktif',
+            'alasan_perubahan' => 'required|string|max:500',
+            'tanggal_perubahan' => 'required|date'
+        ]);
+
+        // Simpan status lama untuk log
+        $status_lama = $keluarga->status_kk;
+
+        // Update status keluarga
+        $keluarga->update([
+            'status_kk' => $request->status_kk
+        ]);
+
+        // Simpan log perubahan status
+        LogPerubahanStatus::create([
+            'keluarga_id' => $keluarga->id,
+            'status_lama' => $status_lama,
+            'status_baru' => $request->status_kk,
+            'alasan_perubahan' => $request->alasan_perubahan,
+            'tanggal_perubahan' => $request->tanggal_perubahan,
+            'user_pengubah' => Auth::user()->name ?? 'System'
+        ]);
+
+        return redirect()->route('keluarga.show', $keluarga->id)
+            ->with('success', 'Status keluarga berhasil diperbarui');
+    }
+
+    // Method untuk melihat riwayat perubahan status
+    public function riwayatStatus(Keluarga $keluarga)
+    {
+        $riwayat = $keluarga->logPerubahanStatus()->orderBy('created_at', 'desc')->get();
+        return view('keluarga.riwayat-status', compact('keluarga', 'riwayat'));
     }
 
     public function destroy(Keluarga $keluarga)

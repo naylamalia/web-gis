@@ -14,6 +14,7 @@ return new class extends Migration
             $table->year('tahun_anggaran');
             $table->enum('status', ['aktif', 'non-aktif'])->default('aktif');
             $table->decimal('nominal', 10, 2)->nullable();
+            $table->date('tanggal_cair')->nullable();
             $table->timestamps();
 
             // Agar satu KK tidak punya bantuan ganda di tahun yang sama

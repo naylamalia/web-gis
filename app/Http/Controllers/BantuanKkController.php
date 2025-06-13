@@ -20,7 +20,8 @@ class BantuanKkController extends Controller
             'keluarga_id' => 'required|exists:keluargas,id',
             'tahun_anggaran' => 'required|digits:4',
             'status' => 'required|in:aktif,non-aktif',
-            'nominal' => 'required|numeric'
+            'nominal' => 'required|numeric',
+            'tanggal_cair' => 'required|date',
         ]);
 
         BantuanKk::create($request->all());
@@ -38,7 +39,8 @@ class BantuanKkController extends Controller
         $request->validate([
             'tahun_anggaran' => 'required|digits:4',
             'status' => 'required|in:aktif,non-aktif',
-            'nominal' => 'required|numeric'
+            'nominal' => 'required|numeric',
+            'tanggal_cair' => 'required|date',
         ]);
 
         $bantuan->update($request->all());

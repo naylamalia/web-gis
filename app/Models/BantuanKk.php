@@ -12,7 +12,7 @@ class BantuanKk extends Model
     protected $table = 'bantuan_kk';
 
     protected $fillable = [
-        'keluarga_id', 'tahun_anggaran', 'status', 'nominal'
+        'keluarga_id', 'tahun_anggaran', 'status', 'nominal', 'tanggal_cair'
     ];
 
     public function keluarga()

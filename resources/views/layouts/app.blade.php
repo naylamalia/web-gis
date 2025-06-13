@@ -293,6 +293,16 @@
                             <i class="bi bi-geo-alt-fill"></i> <span>Peta Keluarga Kurang Mampu</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('peta-bantuan.index') }}">
+                        <i class="bi bi-house-heart"></i> Status Bantuan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">
+                            <i class="bi bi-info-circle"></i> About Us
+                        </a>
+                    </li>
                 </ul>
                 
                 <!-- Spacer untuk mendorong tombol kembali ke bawah -->

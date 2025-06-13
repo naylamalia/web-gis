@@ -18,6 +18,7 @@
                         <th>Tahun</th>
                         <th>Status</th>
                         <th>Nominal</th>
+                        <th>Tanggal Cair</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                             </span>
                         </td>
                         <td>Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
+                        <td>{{ $item->tanggal_cair ? \Carbon\Carbon::parse($item->tanggal_cair)->format('d/m/Y') : '-' }}</td>
                         <td>
                             <a href="{{ route('bantuan.edit', $item->id) }}" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil"></i>
@@ -49,7 +51,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center">Tidak ada data bantuan</td>
+                        <td colspan="7" class="text-center">Tidak ada data bantuan</td>
                     </tr>
                     @endforelse
                 </tbody>

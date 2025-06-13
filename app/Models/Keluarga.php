@@ -26,6 +26,7 @@ class Keluarga extends Model
         'kecamatan',
         'kategori_kemiskinan',
         'bantuan',
+        'status_kk'
     ];
 
 
@@ -43,6 +44,36 @@ class Keluarga extends Model
     {
         return $this->hasMany(\App\Models\BantuanKk::class, 'keluarga_id');
     }
+    public function logPerubahanStatus()
+    {
+        return $this->hasMany(LogPerubahanStatus::class, 'keluarga_id');
+    }
 
+    // Accessor untuk status badge
+    public function getStatusBadgeAttribute()
+    {
+        $badges = [
+            'aktif' => 'bg-success',
+            'pindah' => 'bg-warning',
+            'tidak_miskin' => 'bg-info',
+            'meninggal' => 'bg-dark',
+            'tidak_aktif' => 'bg-danger'
+        ];
+
+        return $badges[$this->status_kk] ?? 'bg-secondary';
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        $labels = [
+            'aktif' => 'Aktif',
+            'pindah' => 'Pindah Alamat',
+            'tidak_miskin' => 'Tidak Miskin Lagi',
+            'meninggal' => 'Kepala Keluarga Meninggal',
+            'tidak_aktif' => 'Tidak Aktif'
+        ];
+
+        return $labels[$this->status_kk] ?? 'Unknown';
+    }
 }
 

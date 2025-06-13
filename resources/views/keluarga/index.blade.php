@@ -66,6 +66,13 @@
         background: #e63946;
         border: none;
     }
+
+    /* Custom badge styles untuk status */
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.5rem;
+    }
 </style>
 @endpush
 
@@ -88,6 +95,7 @@
                         <th>Alamat</th>
                         <th>RT/RW</th>
                         <th>Kategori</th>
+                        <th>Status KK</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -101,16 +109,24 @@
                             <td>{{ $kk->rt }}/{{ $kk->rw }}</td>
                             <td>{{ $kk->kategori_kemiskinan }}</td>
                             <td>
-                                <a href="{{ route('keluarga.show', $kk->id) }}" class="btn btn-info btn-sm me-1">
+                                <span class="badge {{ $kk->status_badge ?? 'bg-success' }}">
+                                    {{ $kk->status_label ?? 'Aktif' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('keluarga.show', $kk->id) }}" class="btn btn-info btn-sm me-1" title="Detail">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('keluarga.edit', $kk->id) }}" class="btn btn-warning btn-sm me-1">
+                                <a href="{{ route('keluarga.edit', $kk->id) }}" class="btn btn-warning btn-sm me-1" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="{{ route('keluarga.riwayat-status', $kk->id) }}" class="btn btn-secondary btn-sm me-1" title="Riwayat Status">
+                                    <i class="bi bi-clock-history"></i>
                                 </a>
                                 <form action="{{ route('keluarga.destroy', $kk->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini??')">
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus data ini??')" title="Hapus">
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </form>
@@ -118,12 +134,56 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">Belum ada data keluarga.</td>
+                            <td colspan="8" class="text-center py-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="bi bi-inbox fs-1 text-muted mb-2"></i>
+                                    <h5 class="text-muted">Belum ada data keluarga</h5>
+                                    <p class="text-muted mb-0">Silakan tambah data keluarga terlebih dahulu</p>
+                                </div>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
+
+        <!-- Statistik Ringkas (Opsional) -->
+        @if($keluargas->count() > 0)
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h4>{{ $keluargas->count() }}</h4>
+                        <p class="mb-0">Total Keluarga</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h4>{{ $keluargas->where('status_kk', 'aktif')->count() + $keluargas->whereNull('status_kk')->count() }}</h4>
+                        <p class="mb-0">Status Aktif</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body text-center">
+                        <h4>{{ $keluargas->where('status_kk', 'pindah')->count() }}</h4>
+                        <p class="mb-0">Pindah Alamat</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-body text-center">
+                        <h4>{{ $keluargas->whereIn('status_kk', ['tidak_aktif', 'meninggal'])->count() }}</h4>
+                        <p class="mb-0">Tidak Aktif</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection

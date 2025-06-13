@@ -4,6 +4,7 @@
             <th>Tahun Anggaran</th>
             <th>Status</th>
             <th>Nominal</th>
+            <th>Tanggal Cair</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
                 </span>
             </td>
             <td>Rp {{ number_format($bantuan->nominal, 0, ',', '.') }}</td>
+            <td>{{ $bantuan->tanggal_cair ? \Carbon\Carbon::parse($bantuan->tanggal_cair)->format('d/m/Y') : '-' }}</td>
             <td>
                 <a href="{{ route('bantuan.edit', $bantuan->id) }}" class="btn btn-warning btn-sm me-1">
                     <i class="bi bi-pencil-square"></i>

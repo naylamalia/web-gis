@@ -15,8 +15,8 @@
     <div class="mb-3">
         <label>Status</label>
         <select name="status" class="form-control" required>
-            <option value="aktif" {{ (old('status', $bantuan->status ?? '') == 'aktif') ? 'selected' : '' }}>Aktif</option>
-            <option value="non-aktif" {{ (old('status', $bantuan->status ?? '') == 'non-aktif') ? 'selected' : '' }}>Non-Aktif</option>
+            <option value="aktif" {{ (old($bantuan->status ?? '') == 'aktif') ? 'selected' : '' }}>Aktif</option>
+            <option value="non-aktif" {{ (old($bantuan->status ?? '') == 'non-aktif') ? 'selected' : '' }}>Non-Aktif</option>
         </select>
     </div>
 
@@ -24,6 +24,12 @@
         <label>Nominal</label>
         <input type="number" name="nominal" class="form-control"
                value="{{ old('nominal', $bantuan->nominal ?? '') }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Tanggal Cair</label>
+        <input type="date" name="tanggal_cair" class="form-control"
+            value="{{ old('tanggal_cair', $bantuan->tanggal_cair ?? '') }}" required>
     </div>
 
     <button type="submit" class="btn btn-success">{{ isset($bantuan) ? 'Perbarui' : 'Simpan' }}</button>

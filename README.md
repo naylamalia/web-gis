@@ -22,7 +22,13 @@
 - Edit file `.env` sesuai kebutuhan, terutama bagian:
   - `APP_NAME`, `APP_URL`
   - Konfigurasi database (`DB_CONNECTION`, `DB_DATABASE`, dst)
-  - Konfigurasi mail jika diperlukan
+  menjadi seperti ini
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=web-gis
+  DB_USERNAME=root
+  DB_PASSWORD=
 
 ## 4. Generate Key
 - Jalankan perintah:
